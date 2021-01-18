@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 const App = () => {
-  const [startingNumber, setStartingNumber] = useState('');
-  const [endingNumber, setEndingNumber] = useState('');
-  const [randomNumber, setRandomNumber] = useState('');
+  const [startingNumber, setStartingNumber] = useState("");
+  const [endingNumber, setEndingNumber] = useState("");
+  const [randomNumber, setRandomNumber] = useState("");
+  const [usedNumbers, setUsedNumbers] = useState([]);
 
   const clearInput = (event) => {
-    return (event.target.value = '');
+    return (event.target.value = "");
   };
 
   const handleStartingChange = (event) => {
@@ -22,32 +23,41 @@ const App = () => {
     event.preventDefault();
     const min = startingNumber;
     const max = endingNumber + 1;
-    setRandomNumber(Math.floor(Math.random() * (max - min) + min));
-  };
+    let num = Math.floor(Math.random() * (max - min) + min);
 
-  console.log(randomNumber);
+    if (usedNumbers.length >= max - min) {
+      alert("you've used all the numbers in that range!");
+    } else {
+      while (usedNumbers.includes(num)) {
+        num = Math.floor(Math.random() * (max - min) + min);
+      }
+    }
+
+    setUsedNumbers([...usedNumbers, num]);
+    setRandomNumber(num);
+  };
 
   return (
     <>
       <p>NUMBER GENERATOR</p>
       <form>
         <p>
-          From{' '}
+          From{" "}
           <input
             onChange={handleStartingChange}
             onClick={clearInput}
             value={startingNumber}
-            placeholder='enter number'
-          />{' '}
-          to{' '}
+            placeholder="enter number"
+          />{" "}
+          to{" "}
           <input
             onChange={handleEndingChange}
             onClick={clearInput}
             value={endingNumber}
-            placeholder='enter number'
-          />{' '}
+            placeholder="enter number"
+          />{" "}
         </p>
-        <button onClick={generateNumber} type='submit'>
+        <button onClick={generateNumber} type="submit">
           Generate!
         </button>
       </form>
