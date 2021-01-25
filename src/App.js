@@ -38,9 +38,22 @@ const App = () => {
   };
 
   return (
-    <>
-      <p>NUMBER GENERATOR</p>
-      <form>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <p>NUMBER GENERATOR (No repeats)</p>
+      <form
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <p>
           From{" "}
           <input
@@ -57,13 +70,32 @@ const App = () => {
             placeholder="enter number"
           />{" "}
         </p>
-        <button onClick={generateNumber} type="submit">
+
+        <button
+          style={{ height: 30, borderRadius: 5, marginLeft: 15 }}
+          onClick={generateNumber}
+          type="submit"
+        >
           Generate!
         </button>
       </form>
-
-      {randomNumber && <p>{randomNumber}</p>}
-    </>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: 75,
+          width: 75,
+          backgroundColor: "pink",
+          borderRadius: 5,
+          marginTop: 100,
+        }}
+      >
+        {randomNumber && (
+          <p style={{ fontWeight: "bold", fontSize: 24 }}>{randomNumber}</p>
+        )}
+      </div>
+    </div>
   );
 };
 
